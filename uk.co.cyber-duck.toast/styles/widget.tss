@@ -1,0 +1,42 @@
+".toast": {
+    width: "100%",
+    height: Ti.UI.SIZE,
+    bottom: 0,
+    visible: false,
+}
+".toast-muted": { backgroundColor: "#777" }
+".toast-success": { backgroundColor: "#3c763d" }
+".toast-info": { backgroundColor: "#31708f" }
+".toast-warning": { backgroundColor: "#E1981A" }
+".toast-danger": { backgroundColor: "#D13734" }
+".toast-wrapper": {
+    left: 10,
+    right: 70,
+    height: Ti.UI.SIZE,
+    layout: "vertical",
+}
+".toast-wrapper-noclose": {
+    left: 10,
+    right: 10,
+    height: Ti.UI.SIZE,
+    layout: "vertical",
+}
+".toast-label": {
+    font: { fontSize: 13 },
+    width: Ti.UI.FILL,
+    height: Ti.UI.SIZE,
+    color: "#ffffff",
+    textAlign: "left",
+    top: 10,
+    bottom: 10,
+}
+".toast-close-button": {
+    right: 10,
+    top: null,
+    bottom: null,
+    width: 50,
+    height: 40,
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 0,
+}

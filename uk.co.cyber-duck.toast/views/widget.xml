@@ -1,0 +1,8 @@
+<Alloy>
+    <View id="toast" class="toast" autoLayout="true">
+        <View id="toastWrapper" class="toast-wrapper" autoLayout="true">
+            <Label id="message" text="This is a toast notification." class="toast-label" />
+        </View>
+        <Button id="toastClose" class="toast-close-button" autoLayout="true" />
+    </View>
+</Alloy>
