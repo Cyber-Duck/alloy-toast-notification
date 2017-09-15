@@ -1,1 +1,1 @@
-uk.co.cyber-duck.toast/readme.md
+uk.co.cyber-duck.toast/README.md
