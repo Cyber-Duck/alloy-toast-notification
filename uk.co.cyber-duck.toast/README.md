@@ -121,7 +121,9 @@ Defaults [from the SDK](https://docs.appcelerator.com/platform/latest/#!/api/Tit
 
 This is following the best practises in terms of widget styling from [the official documentation](https://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Widgets).
 
-You can overriding any TSS class by creating the following file `app/themes/[your_theme_name]/widgets/uk.co.cyber-duck.toast/styles/widget.tss`.
+You can overriding any TSS class by creating the following file:
+
+`app/themes/[your_theme_name]/widgets/uk.co.cyber-duck.toast/styles/widget.tss`
 
 Once that file created, feel free to pick and choose from our classes within the original [`widget.tss`](https://github.com/Cyber-Duck/alloy-toast-notification/blob/master/uk.co.cyber-duck.toast/styles/widget.tss) file.
 
