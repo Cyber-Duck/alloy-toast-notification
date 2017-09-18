@@ -92,7 +92,7 @@ $.toast.addEventListener("click", function (e) {
 
     $.setCategory(category);
 
-    if (!$.args.hidden) {
+    if (_.has($.args, "hidden") && !$.args.hidden) {
         // animate 300ms after the widget is initialised
         _.delay(slideUp, 300);
     }
