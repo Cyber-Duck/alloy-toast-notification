@@ -117,7 +117,7 @@ Defaults [from the SDK](https://docs.appcelerator.com/platform/latest/#!/api/Tit
 * `e.bubbles`
 * `e.cancelBubble`
 
-## TSS Styling
+## TSS Styling
 
 This is following the best practises in terms of widget styling from [the official documentation](https://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Widgets).
 
