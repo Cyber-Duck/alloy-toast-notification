@@ -97,7 +97,7 @@ $.myelement.addEventListener("dismiss", doSomething); // same thing to use "onDi
 
 ### Widget Functions
 
-* `$.myelement.show()`
+* `$.myelement.show(message: String [optional])` -- Will slide the notification up and set the `text` attribute at the same time if given.
 * `$.myelement.hide()`
 
 ## Public Events
