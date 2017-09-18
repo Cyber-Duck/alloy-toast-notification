@@ -4,17 +4,11 @@
 
 **Simple toast notification poping from the bottom of the screen on demand.**
 
-This is a Axway Titanium Alloy Widget wrapping some standard components in order
-to create a re-usable Widget for a single choice selection within a ListView with
-a support for a "Other" entry.
-
-Here we are using one Ti.UI.ListView, one Ti.UI.ListSection and multiple Ti.UI.ListItems.
+This is a Axway Titanium Alloy Widget wrapping some standard components in order to create a
+re-usable Widget for a toast notification which can be used on any screen of your application.
 
 We've tried to make the API as simple and intuitive as possible but we're opened for
-pull requests too.
-
-At the moment we only support a single selection mode but we could work on a multiple
-selection mode in the future.
+help, contributions and pull requests too.
 
 ## Installation
 
@@ -30,138 +24,106 @@ $ gittio install uk.co.cyber-duck.toast
 
 ## Alloy implementation
 
+Here is a simple example of how to use this widget.
+We recommend to locate it at the bottom of your screen, just before the closing `<Window>` XML tag.
+
 ```xml
 <Alloy>
-    <Widget src="uk.co.cyber-duck.toast" id="myelement" rendered="true|false" text="This is a toast notification."
-        [closeImage|closeClass]="[/images/image.png"|someclass]"
-        dismissable="true|false" onDismiss="doSomething" />
+    <Window>
+        <!-- ... -->
+        <Widget src="uk.co.cyber-duck.toast" id="myelement"
+            hidden="true|false" text="This is a toast notification."
+            category="danger|success|warning|info|muted"
+            dismissable="true|false" onDismiss="doSomething"
+            closeText="Cancel" />
+    </Window>
 </Alloy>
 ```
 
-`closeImage` and `rendered` has to be defined upon Widget instanciation but `options` and `otherTitle` can be defined at both XML View level or JS Controller level:
+or using only JS:
 
 ```js
-$.myelement.addEventListener("dismiss", doSomething);
-$.myelement.setDismissable(true|false);
+var myelement = Alloy.createWidget("uk.co.cyber-duck.toast", "myelement", {
+    hidden: true|false,
+    text: "This is a toast notification."
+    category: "danger|success|warning|info|muted",
+    // ...
+});
+```
+
+## Instanciation
+
+Upon instanciation, fro either the Alloy Controller (Javascript) or the Alloy View (XML), a couple of arguments can be accepted:
+
+* `hidden` - `Boolean` - default: `true` -- Should the notification be rendered immediatly or not?
+* `text` - `String` - default: `""` -- Actual text used to render the notification.
+* `category` - `String` - default: `"danger"` -- This is driving the style/colors for the notification.
+* `dismissable` - `Boolean` - default: `true` -- Can the notification be ignored/dismissed/closed or not?
+
+Only if `dismissable` is set to `true`, the following additional arguments can also be accepted:
+
+* `onDismiss` - `Event` -- Event triggered when the notification is closed.
+* `closeText` or `closeLabelClass`:
+    * `closeText` - `String` - default: `"CLOSE"` -- Used to customised the text for the close button.
+    * `closeLabelClass` - `String` - default: `""` -- Used to add a class to the close button, very useful with icon fonts like Font Awesome or IonIcons fonts.
+    * If both `closeText` and `closeLabelClass` are given, `closeLabelClass` will always have priority.
+
+Some public functions are accessible from this widget instance:
+
+```js
+$.myelement.isVisible();
+$.myelement.getText();
+$.myelement.getCategory();
+
 $.myelement.setText("This is a toast notification.");
+$.myelement.setCategory('info');
+$.myelement.show();
+$.myelement.hide();
+
+$.myelement.addEventListener("dismiss", doSomething); // same thing to use "onDismiss" from within the XML view
 ```
 
 ## Public Methods
 
 ### Setters
 
-* `$.myelement.setOptions(options: Array<String>)`
-* `$.myelement.setOtherTitle(title: String)`
-* `$.myelement.setOtherSubtitle(subtitle: String)`
+* `$.myelement.setText(title: String)`
+* `$.myelement.setCategory(title: String)`
 
 ### Getters
 
-* `$.myelement.getValue()`
-* `$.myelement.getOtherValue()`
-* `$.myelement.getSelectedOption()`
+* `$.myelement.getText()` returns `String`
+* `$.myelement.getCategory()` returns `String`
 
 ### Widget Functions
 
-* `$.myelement.selectOptionAtIndex(index: Integer)`
-* `$.myelement.unselectAllOptions()`
+* `$.myelement.show()`
+* `$.myelement.hide()`
 
 ## Public Events
 
-### `optionSelected(e)`
+### `dismiss(e)`
 
-Triggered when any of the option is selected.
-
-#### Context
-
-Defaults [from the SDK](https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.ListView-event-itemclick) `itemclick` event:
-
-* `e.source` --> Ti.UI.ListView
-* `e.section` --> Ti.UI.ListSection
-* `e.sectionIndex`
-* `e.itemIndex`
-* `e.itemId`
-* `e.bindId`
-
-Added context variables from our Widget:
-
-* `e.selectedOption` --> Ti.UI.ListItem
-* `e.value` --> String
-
-### `otherSelected(e)`
-
-Triggered when the `hasOther` parameter is set to `true` and when the last "Other" option is selected.
+Triggered when the notification is dismissed.
 
 #### Context
 
-Defaults [from the SDK](https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.ListView-event-itemclick) `itemclick` event:
+Defaults [from the SDK](https://docs.appcelerator.com/platform/latest/#!/api/Titanium.UI.View-event-click) `click` event:
 
-* `e.source` --> Ti.UI.ListView
-* `e.section` --> Ti.UI.ListSection
-* `e.sectionIndex`
-* `e.itemIndex`
-* `e.itemId`
-* `e.bindId`
+* `e.source`
+* `e.type`
+* `e.x`
+* `e.y`
+* `e.bubbles`
+* `e.cancelBubble`
 
-Added context variables from our Widget:
+## TSS Styling
 
-* `e.otherTitle` --> String
-* `e.otherSubtitle` --> String
+This is following the best practises in terms of widget styling from [the official documentation](https://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Widgets).
 
-## Bonus
+You can overriding any TSS class by creating the following file `app/themes/[your_theme_name]/widgets/uk.co.cyber-duck.toast/styles/widget.tss`.
 
-A good implementation of `otherSelected` could be to open a new `Ti.UI.Window` in order to ask the
-user more details about that "Other" entry:
-
-Assuming you have a `controllers/textarea`:
-
-```xml
-<Alloy>
-    <Window title="Please specify">
-        <LeftNavButton platform="ios">
-            <View>
-                <Button title="Back" onClick="doBack" />
-            </View>
-        </LeftNavButton>
-        <TextArea id="textareaElement" />
-    </Window>
-</Alloy>
-```
-
-```js
-var args = $.args;
-
-if (args.value) {
-    $.textareaElement.setValue(args.value);
-}
-
-function doBack() {
-    $.trigger("closed", {
-        "value": $.textareaElement.getValue()
-    });
-    $.getView().close();
-}
-```
-
-You could have:
-
-```xml
-<Alloy>
-    <Widget id="myelement" src="uk.co.cyber-duck.select"
-        hasOther="true" onOtherSelected="otherSelected" />
-</Alloy>
-```
-
-```js
-function otherSelected(e) {
-    var controller = Alloy.createController("textarea", { "value": "Some initial copy" });
-    controller.addEventListener("closed", function(param){
-        $.myelement.setOtherSubtitle(param.value);
-    });
-    myCurrentWindow.openWindow(controller.getView());
-}
-```
-
-You get the idea ;)
+Once that file created, feel free to pick and choose from our classes within the original [`widget.tss`](https://github.com/Cyber-Duck/alloy-toast-notification/blob/master/uk.co.cyber-duck.toast/styles/widget.tss) file.
 
 ## License
 

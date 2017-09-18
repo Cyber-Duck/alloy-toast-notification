@@ -21,6 +21,15 @@ $.setText = function (message) {
     text = message;
     $.message.setText(text);
 };
+$.setCategory = function (cat) {
+    if (!_.contains(["danger", "success", "warning", "info", "muted"], cat)) {
+        throw new Error("Invalid category. Categories: danger, success, warning, info or muted.");
+    }
+    $.resetClass($.toast, "toast toast-" + cat);
+    category = cat;
+
+    return category;
+};
 
 // Public methods
 $.show = function (message) {
@@ -36,15 +45,6 @@ $.hide = function () {
     if (!dismissable) { return; }
 
     return slideDown();
-};
-$.setCategory = function (cat) {
-    if (!_.contains(["danger", "success", "warning", "info", "muted"], cat)) {
-        throw new Error("Invalid category. Categories: danger, success, warning, info or muted.");
-    }
-    $.resetClass($.toast, "toast toast-" + cat);
-    category = cat;
-
-    return category;
 };
 // Private methods
 function slideUp() {
