@@ -3,7 +3,7 @@
     "name": "Alloy Toast Notification",
     "description" : "Simple toast notification poping from the bottom of the screen on demand.",
     "author": "Cyber-Duck Ltd",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "copyright": "Copyright (c) 2017",
     "license": "Apache License, Version 2.0",
     "min-alloy-version": "1.3",
