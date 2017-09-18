@@ -7,13 +7,13 @@ var dismissable = true,
 
 // Getters
 $.isVisible = function () {
-    return $.toast.getVisible();
+    return $.toast.getOpacity() > 0;
 };
 $.getText = function () {
     return text;
 };
 $.getCategory = function () {
-    return cateogry;
+    return category;
 };
 
 // Setters
@@ -48,16 +48,16 @@ $.hide = function () {
 };
 // Private methods
 function slideUp() {
-    $.toast.setBottom(-$.toast.getRect().height);
-    $.toast.setVisible(true);
+    $.toast.setBottom("-50%");
+    $.toast.setOpacity(1);
 
-    return $.toast.animate({ bottom: 0 });
+    return $.toast.animate({ bottom: 0, duration: 500 });
 }
 function slideDown() {
     return $.toast.animate({
         bottom: -$.toast.getRect().height
     }, function (){
-        $.toast.setVisible(false);
+        $.toast.setOpacity(0);
     });
 }
 
@@ -94,6 +94,6 @@ $.toast.addEventListener("click", function (e) {
 
     if (!$.args.hidden) {
         // animate 300ms after the widget is initialised
-        _.delay(slideUp, 500);
+        _.delay(slideUp, 300);
     }
 })();
