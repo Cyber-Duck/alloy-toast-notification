@@ -51,7 +51,7 @@ var myelement = Alloy.createWidget("uk.co.cyber-duck.toast", "myelement", {
 });
 ```
 
-## Instanciation
+## Instantiation
 
 Upon instanciation, fro either the Alloy Controller (Javascript) or the Alloy View (XML), a couple of arguments can be accepted:
 
