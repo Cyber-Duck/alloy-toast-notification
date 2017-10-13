@@ -22,7 +22,7 @@ $.setText = function (message) {
     $.message.setText(text);
 };
 $.setCategory = function (cat) {
-    if (!_.contains(["danger", "success", "warning", "info", "muted"], cat)) {
+    if (!_.contains([ "danger", "success", "warning", "info", "muted" ], cat)) {
         throw new Error("Invalid category. Categories: danger, success, warning, info or muted.");
     }
     $.resetClass($.toast, "toast toast-" + cat);
@@ -32,9 +32,13 @@ $.setCategory = function (cat) {
 };
 
 // Public methods
-$.show = function (message) {
+$.show = function (message, category) {
     message = message || false;
+    category = category || false;
 
+    if (category) {
+        $.setCategory(category);
+    }
     if (message) {
         $.message.setText(message);
     }
@@ -56,7 +60,7 @@ function slideUp() {
 function slideDown() {
     return $.toast.animate({
         bottom: -$.toast.getRect().height
-    }, function (){
+    }, function() {
         $.toast.setOpacity(0);
     });
 }
@@ -87,12 +91,12 @@ $.toast.addEventListener("click", function (e) {
         }
     } else {
         $.toast.remove($.toastClose);
-        $.resetClass($.toastWrapper, 'toast-wrapper-noclose');
+        $.resetClass($.toastWrapper, "toast-wrapper-noclose");
     }
 
     $.setCategory(category);
 
-    if (!$.args.hidden) {
+    if (_.has($.args, "hidden") && !$.args.hidden) {
         // animate 300ms after the widget is initialised
         _.delay(slideUp, 300);
     }
