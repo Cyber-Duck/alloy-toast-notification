@@ -76,9 +76,11 @@ $.myelement.getText();
 $.myelement.getCategory();
 
 $.myelement.setText("This is a toast notification.");
-$.myelement.setCategory('info');
+$.myelement.setCategory("info");
 $.myelement.show();
 $.myelement.hide();
+
+$.myelement.show("This another one.", "success");
 
 $.myelement.addEventListener("dismiss", doSomething); // same thing to use "onDismiss" from within the XML view
 ```
